@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+
 import { LoginSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
 import {
@@ -49,7 +49,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
             form.reset();
