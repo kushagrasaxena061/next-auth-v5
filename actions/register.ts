@@ -1,8 +1,8 @@
 "use server";
 
-import React from "react";
 import * as z from "zod";
 import bcrypt from "bcryptjs";
+
 import { db } from "@/lib/db";
 import { RegisterSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
@@ -34,7 +34,10 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   });
 
   const verificationToken = await generateVerificationToken(email);
-  await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  await sendVerificationEmail(
+    verificationToken.email,
+    verificationToken.token,
+  );
 
   return { success: "Confirmation email sent!" };
 };
